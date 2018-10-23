@@ -16,7 +16,7 @@ var download = function(uri, filename, callback){
  * 
  *   api.setOptions({
  *     logLevel: "silent",
- *     updatePresence: true,
+ *     updatePresence: true,x
  *     selfListen : true
  *   });
  * 
