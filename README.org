@@ -1,1 +1,27 @@
-^
+# #+OPTIONS: ':t *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+# #+OPTIONS: broken-links:nil c:nil creator:nil d:(not "LOGBOOK")
+# #+OPTIONS: date:t e:t email:nil f:t inline:t num:t p:nil pri:nil
+# #+OPTIONS: prop:nil stat:t tags:t tasks:t tex:t timestamp:t title:t
+# #+OPTIONS: toc:t todo:t |:t
+
+#+OPTIONS: toc:t
+
+
+#+TITLE: README
+#+DATE: <2018-10-25 Thu>
+#+AUTHOR: Stanislav Arnaudov
+#+EMAIL: arnaud@localhost
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.1 (Org mode 9.1.13)
+
+* FControll-Messanger
+** Abstract
+A tool that helps you "control stuff" through the Facebook messages. Features of utility include:
+- Logging of all incoming messages - Facebook recently revealed a plan to allow deletion of messages from the opposite side so that you can never see the deleted message. FControll will remember all send messages even if they are deleted.
+- Saving a send by you to you image in some folder. You can just send some image to yourself and it will be saved on the computer where FControll is running
+** Installation
+
+
+** Usage
