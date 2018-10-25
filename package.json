@@ -1,27 +1,32 @@
 {
-  "name": "fcontroll-massager",
-  "version": "1.0.0",
-  "description": "A simple JS-application that help you easly store your \"Internet things\"",
-  "main": "messanger.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/palikar/fcontroll-massager.git"
-  },
-  "keywords": [
-    "logging",
-    "convinience",
-    "javascript"
-  ],
-  "author": "Stanislav Arnaudov",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/palikar/fcontroll-massager/issues"
-  },
-  "homepage": "https://github.com/palikar/fcontroll-massager#readme",
-  "dependencies": {
-    "facebook-chat-api": "^1.6.0"
-  }
+    "name": "fcontroll-massager",
+    "version": "1.0.0",
+    "description": "A simple JS-application that help you easly store your \"Internet things\"",
+    "main": "messanger.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node ./messanger.js"
+    },
+    "bin": {
+        "fcontroll": "./messanger.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/palikar/fcontroll-massager.git"
+    },
+    "keywords": [
+        "logging",
+        "convinience",
+        "javascript"
+    ],
+    "author": "Stanislav Arnaudov",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/palikar/fcontroll-massager/issues"
+    },
+    "homepage": "https://github.com/palikar/fcontroll-massager#readme",
+    "dependencies": {
+        "expandenv": "^1.0.0",
+        "facebook-chat-api": "^1.6.0"
+    }
 }
