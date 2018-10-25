@@ -48,11 +48,38 @@ var presence = createLogger({
 });
 
 
+var atachment = createLogger({
+    transports: [
+        new transports.File({ filename: __dirname + '/logging.d/atachments.log', json: false, timestamp: true })
+    ],
+    format: combine(
+        timestamp(),
+        msg_format
+    ),
+    exitOnError: false
+});
+
+
+var typ = createLogger({
+    transports: [
+        new transports.File({ filename: __dirname + '/logging.d/typing.log', json: false, timestamp: true })
+    ],
+    format: combine(
+        timestamp(),
+        msg_format
+    ),
+    exitOnError: false
+});
+
+
+
 module.exports = {
     // log_personal : (msg) => personal.log({level:'info'}),
     log_personal : personal.info,
     log_msg : msgs.info,
-    log_presence : presence.info
+    log_presence : presence.info,
+    log_typ : typ.info,
+    log_atachment : atachment.info
 
 }
 

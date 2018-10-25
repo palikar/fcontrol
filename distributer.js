@@ -2,83 +2,79 @@ var Queue = require('queuejs');
 const fs = require("fs");
 const utils = require('./utils.js')
 const logging = require('./logging.js')
-
-const MAX_QUEUE_SIZE = 200
-const PROCESS_BATCH_SIZE = 200
-var msgs_queue = new Queue()
+const saver = require('./saver.js')
 
 
 var user_info_cache = {}
-processors = {};
-
-
-processors["message"] = function(event, api){
-
-    const userID = api.getCurrentUserID();
-    if (! (event.senderID in user_info_cache)) {
-        console.log("updating cache")
-        api.getUserInfo(event.senderID, (err, ret) => {
+function cache_update(event, api, callback){
+    var id = event.senderID || event.userID || event.from;
+    if (! (id in user_info_cache)) {
+        api.getUserInfo(id, (err, ret) => {
             if(err) return console.error(err);
-            user_info_cache[event.senderID] = ret[event.senderID]
-            logging.log_personal(ret[event.senderID].name + ' : ' + event.body)
+            user_info_cache[id] = ret[id];
+            event.userInfo = user_info_cache[id]
+            callback(event);
         });
-    }else{        
-        if(event.senderID == userID){
-            logging.log_personal(user_info_cache[event.senderID]['name'] + ' : ' + event.body)            
-        }
+    }else{
+        event.userInfo = user_info_cache[id]
+        callback(event);
     }
 }
 
+
+processors = {};
+
+processors["message"] = function(event, api){
+    const userID = api.getCurrentUserID();
+    cache_update(event, api, function(event){
+        if(event.senderID == userID){
+            logging.log_personal(event.threadID + ' : ' +
+                                 user_info_cache[event.senderID]['name'] + ' : ' +
+                                 event.body);            
+            saver.save_attachment_personal(event.attachments, event, api);
+        }else{
+            logging.log_msg(event.threadID + ' : ' +
+                            user_info_cache[event.senderID]['name'] + ' : ' +
+                            event.body);
+            saver.save_attachment(event.attachments, event, api);
+        }
+    });
+
+}
+
 processors["typ"] = function(event, api){
-
-
+    cache_update(event, api, function(event){
+        if(event.userInfo !== undefined){
+            logging.log_presence(event.threadID + ' : ' +
+                                 event.userInfo['name'] + ' : typing : ' +
+                                 event.isTyping );
+        }
+    });
 }
 
 
 processors["presence"] = function(event, api){
-
-
+    cache_update(event, api, function(event){        
+        if(event.userInfo !== undefined){
+            var stat;
+            if (event.statuses == 0){
+                stat = "(0) idle, away for 2 minutes"
+            }else if(event.statuses == 2){
+                stat = "(2) online"
+            }else{
+                stat = event.statuses
+            }
+            logging.log_presence(event.userInfo['name'] + ' : presence : ' +
+                                 stat);
+        }
+    });
 }
 
-
-processors["read_receipt"] = function(event, api){
-
-
-}
-
-
-processors["message_reaction"] = function(event, api){
-
-
-}
-
-
-
-var flushQueue = function(){
-    
-    var processed = 0;
-    while(!msgs_queue.isEmpty() && processed < PROCESS_BATCH_SIZE){
-        var event = msgs_queue.deq();
-        processors[event.type](event)
-        processed++;
-    }
-
-}
 
 var process = function(event, api){
-    // console.log(event)
-
-    processors[event.type](event,api)
-    
-    // msgs_queue.enqueue(event)
-
-    // if (msgs_queue.size() > 5) {
-    //     flushQueue()
-    // }
-
+    if (event.type in processors)
+        processors[event.type](event, api)
 }
-
-
 
 
 module.exports = {
