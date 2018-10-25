@@ -1,6 +1,7 @@
 const fs = require("fs");
 const login = require("facebook-chat-api");
 const readline = require('readline');
+const dispatch = require('./distributer.js');
 var Writable = require('stream').Writable;
 
 
@@ -18,27 +19,27 @@ var rl = readline.createInterface({
 
 
 
-rl.question("Facebook Email adress: ", (name) => {
+// rl.question("Facebook Email adress: ", (name) => {
 
-    rl.stdoutMuted = true;
-    rl.query = "Password : ";
-    rl.question(rl.query, (pass) => {
+//     rl.stdoutMuted = true;
+//     rl.query = "Password : ";
+//     rl.question(rl.query, (pass) => {
 
 
-        console.log('\n')
+//         console.log('\n')
         
-        initFacebookChat(name, pass, true)
-        rl.history = rl.history.slice(1);
-        rl.close();
-    })
+//         initFacebookChat(name, pass, true)
+//         rl.history = rl.history.slice(1);
+//         rl.close();
+//     })
 
-    rl._writeToOutput = function _writeToOutput(stringToWrite) {
-        if (rl.stdoutMuted)
-            rl.output.write("\x1B[2K\x1B[200D"+rl.query+"["+((rl.line.length%2==1)?"=-":"-=")+"]");
-        else
-            rl.output.write(stringToWrite);
-    };
-});
+//     rl._writeToOutput = function _writeToOutput(stringToWrite) {
+//         if (rl.stdoutMuted)
+//             rl.output.write("\x1B[2K\x1B[200D"+rl.query+"["+((rl.line.length%2==1)?"=-":"-=")+"]");
+//         else
+//             rl.output.write(stringToWrite);
+//     };
+// });
 
 
 var stopListening
@@ -66,32 +67,13 @@ function initFacebookChat(email, pass, saveState, restoreState){
             listenEvents: true
         });
 
-        stopListening = api.listen((err, event) => {processEvent(err, event, api)});
+        stopListening = api.listen((err, event) => {
+            if(err) return console.error(err);
+            dispatch.process(event, api)
+        });
 
         
     });
-}
-
-function processEvent(err, event, api) {
-
-    // console.log("this is some new things")
-    // var yourID = api.getCurrentUserID();
-    // console.log(yourID)
-    if(!event)
-        return
-    
-    switch(event.type) {
-    case "message":
-        console.log(event.body);
-        console.log(event.attachments[0].largePreviewUrl);
-        break;
-    case "event":
-        console.log(event);
-        break;
-    case "type":
-        console.log("The bitch is typing");
-        break;
-    }
 }
 
 

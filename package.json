@@ -27,6 +27,9 @@
     "homepage": "https://github.com/palikar/fcontroll-massager#readme",
     "dependencies": {
         "expandenv": "^1.0.0",
-        "facebook-chat-api": "^1.6.0"
+        "facebook-chat-api": "^1.6.0",
+        "live-mutex": "^0.1.1054",
+        "queuejs": "^0.1.0",
+        "winston": "^3.1.0"
     }
 }
