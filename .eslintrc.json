@@ -1,0 +1,33 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "amd": true,
+        "node": true,
+        "jasmine": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-console": "off",
+        "no-unused-vars": ["error", { "args": "none" }]
+    }
+}

@@ -5,7 +5,8 @@
     "main": "messanger.js",
     "scripts": {
         "test": "mocha",
-        "start": "node ./fcontroll.js"
+        "start": "node ./fcontroll.js",
+        "lint": "./node_modules/.bin/eslint **.js"
     },
     "bin": {
         "fcontroll": "./messanger.js"
@@ -36,6 +37,7 @@
     },
     "devDependencies": {
         "chai": "^4.2.0",
+        "eslint": "^5.7.0",
         "mocha": "^5.2.0",
         "rewire": "^4.0.1",
         "sinon": "^7.1.0"

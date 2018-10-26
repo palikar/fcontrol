@@ -1,6 +1,6 @@
 // const winston = require('winston');
 const { createLogger, format, transports } = require('winston');
-const { combine, timestamp, label, printf } = format;
+const { combine, timestamp, printf } = format;
 
 
 
@@ -81,5 +81,5 @@ module.exports = {
     log_typ : typ.info,
     log_atachment : atachment.info
 
-}
+};
 

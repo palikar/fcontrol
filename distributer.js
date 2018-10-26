@@ -1,30 +1,27 @@
-var Queue = require('queuejs');
-const fs = require("fs");
-const utils = require('./utils.js')
-const logging = require('./logging.js')
-const saver = require('./saver.js')
+const logging = require('./logging.js');
+const saver = require('./saver.js');
 
 
-var user_info_cache = {}
+var user_info_cache = {};
 function cache_update(event, api, callback){
     var id = event.senderID || event.userID || event.from;
     if (! (id in user_info_cache)) {
         api.getUserInfo(id, (err, ret) => {
             if(err) return console.error(err);
             user_info_cache[id] = ret[id];
-            event.userInfo = user_info_cache[id]
+            event.userInfo = user_info_cache[id];
             callback(event);
         });
     }else{
-        event.userInfo = user_info_cache[id]
+        event.userInfo = user_info_cache[id];
         callback(event);
     }
 }
 
 
-processors = {};
+var processors = {};
 
-processors["message"] = function(event, api){
+processors['message'] = function(event, api){
     const userID = api.getCurrentUserID();
     cache_update(event, api, function(event){
         if(event.senderID == userID){
@@ -40,9 +37,9 @@ processors["message"] = function(event, api){
         }
     });
 
-}
+};
 
-processors["typ"] = function(event, api){
+processors['typ'] = function(event, api){
     cache_update(event, api, function(event){
         if(event.userInfo !== undefined){
             logging.log_presence(event.threadID + ' : ' +
@@ -50,33 +47,33 @@ processors["typ"] = function(event, api){
                                  event.isTyping );
         }
     });
-}
+};
 
 
-processors["presence"] = function(event, api){
+processors['presence'] = function(event, api){
     cache_update(event, api, function(event){        
         if(event.userInfo !== undefined){
             var stat;
             if (event.statuses == 0){
-                stat = "(0) idle, away for 2 minutes"
+                stat = '(0) idle, away for 2 minutes';
             }else if(event.statuses == 2){
-                stat = "(2) online"
+                stat = '(2) online';
             }else{
-                stat = event.statuses
+                stat = event.statuses;
             }
             logging.log_presence(event.userInfo['name'] + ' : presence : ' +
                                  stat);
         }
     });
-}
+};
 
 
 var process = function(event, api){
     if (event.type in processors)
-        processors[event.type](event, api)
-}
+        processors[event.type](event, api);
+};
 
 
 module.exports = {
     process
-}
+};
