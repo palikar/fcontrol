@@ -1,9 +1,8 @@
 const chai = require('chai');
 const expect = require('chai').expect;
-// const saver = require('../saver.js')
 const sinon = require('sinon');
 var rewire = require('rewire');
-var saver = rewire('../saver.js');
+var saver = rewire('../lib/saver.js');
 
 
 describe('Saver', function () {

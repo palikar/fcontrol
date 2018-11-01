@@ -24,27 +24,27 @@ if (args.help) {
         -v, --version      show version info and exit
         -cli               use the tool only with command line arguments
         -e  --email        the email of your facebook acount 
-        -p  --pass         the password of your facebook acount`)
+        -p  --pass         the password of your facebook acount`);
 
-    process.exit(1)
+    process.exit(1);
 }
 
 if (args.version) {
-    console.log("Version:1.0.0")
-    process.exit(1)
+    console.log('Version:1.0.0');
+    process.exit(1);
 }
 
 if(args.cli){
     if(args['restore-state']){
         if(!fs.existsSync(path.join(__dirname, '.appstate.json'))){
-            console.log("No .appstate.json file found, plaese log in first.")
-            process.exit(1)
+            console.log('No .appstate.json file found, plaese log in first.');
+            process.exit(1);
         }
         initFacebookChat('', '', true, true);
     }else{
         if(!args.email || !args.pass){
-            console.log("You must provide email and password.")
-            process.exit(1)
+            console.log('You must provide email and password.');
+            process.exit(1);
         }
         initFacebookChat(args.email, args.pass, args['save-state'], false);   
     }
@@ -61,7 +61,7 @@ if (fs.existsSync(path.join(__dirname, '.appstate.json'))) {
         if (yn.toLowerCase() === 'y' || yn.toLowerCase() === 'yes'){
             initFacebookChat('', '', true, true);
         }else {
-            promtLogin(rl)
+            promtLogin(rl);
         }
     });
 }
@@ -99,7 +99,7 @@ function initFacebookChat(email, pass, saveState, restoreState){
     }
 
     login(loginInfo, (err, api) => {
-        if(err) return console.log(err)
+        if(err) return console.log(err);
         if (saveState)
             fs.writeFileSync('.appstate.json', JSON.stringify(api.getAppState()));
         
