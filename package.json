@@ -26,10 +26,16 @@
         "url": "https://github.com/palikar/fcontroll-massager/issues"
     },
     "homepage": "https://github.com/palikar/fcontroll-massager#readme",
+    "files": [
+        "lib/",
+        "scripts/",
+        "LICENSE"
+    ],
     "dependencies": {
         "expandenv": "^1.0.0",
         "facebook-chat-api": "^1.6.0",
         "lodash": ">=4.17.5",
+        "meow": "^5.0.0",
         "node-mutex": "^0.2.2",
         "queuejs": "^0.1.0",
         "shelljs": "^0.8.2",

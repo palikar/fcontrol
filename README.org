@@ -16,12 +16,63 @@
 #+EXCLUDE_TAGS: noexport
 #+CREATOR: Emacs 26.1 (Org mode 9.1.13)
 
-* FControl-Messanger
+* FControl
 ** Abstract
 A tool that helps you "control stuff" through the Facebook messages. Features of utility include:
-- Logging of all incoming messages - Facebook recently revealed a plan to allow deletion of messages from the opposite side so that you can never see the deleted message. FControl will remember all send messages even if they are deleted.
+- Logging of all incoming messages
 - Saving a send by you to you image in some folder. You can just send some image to yourself and it will be saved on the computer where FControl is running
+- Logging when your friends are using Facebook -- basically, logging when does green dots in the sidebar are present
+- Logging any typing -- if someone is beginning to write a message to you and then stops and deletes is... you will now about it.
+
+[[
+file:screenshots/cli.png]] [[
+file:screenshots/log.png]]
+
+
+*** Yes, but why though?
+There was that one Facebook [[https://www.trustedreviews.com/news/facebook-messenger-unsend-delete-messages-3446074][announcement]] that they will allow messenger's users to delete sent messages as if the weren't sent at all. Now I don't like this one bit! And also I am a software developer and can talk to computers so... who cares what Facebook does, I have this app now and everything that is ever send to me will be saved. 
+
+*** 'Muh Privacy
+Yeaah, weeell, I don't know. The data is public and Facebook tracks you anyway. I am just part of the cabal by this point.
+
 ** Installation
 
+You can clone the repository and install all /npm/-dependencies:
+#+BEGIN_SRC sh
+git clone https://github.com/palikar/fcontol
+cd fcontol
+npm install
+#+END_SRC
+Or if you want to whole thing to be a little more "automatic", just install the package from [[https://www.npmjs.com/][npm]]
+#+BEGIN_SRC sh
+npm install fcontol
+#+END_SRC
 
-** Usage
+** Usage 
+
+
+
+A simple call to ~fcontol --help~ gives:
+#+BEGIN_EXAMPLE
+Description:
+    A tool that logs different events coming from your facebook messanger (messages, typing, presence, attachments)
+    Usage:
+        fcontrol [options]
+
+    Options:
+        -h, --help         print usage information and exit
+        -v, --version      show version info and exit
+        -cli               use the tool only with command line arguments
+        -e  --email        the email of your facebook acount 
+        -p  --pass         the password of your facebook acount
+
+#+END_EXAMPLE
+
+
+
+*** Configuration
+
+*** Logs format
+
+
+** References
