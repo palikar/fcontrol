@@ -6,6 +6,7 @@ var saver = rewire('../lib/saver.js');
 
 
 describe('Saver', function () {
+    
     it('should do nothing (save_attachment)', function () {
         var empty = [];
         var ret = saver.save_attachment(empty,null,null);
@@ -16,7 +17,6 @@ describe('Saver', function () {
         var ret = saver.save_attachment_personal(empty,null,null);
         expect(ret).to.be.equal(-1); 
     });
-
     it('should not find good atachement (save_attachment)', function () {
         var atachments = [{type:'jiberish'},
             {type:'jiberish'}];
@@ -25,7 +25,6 @@ describe('Saver', function () {
         var ret = saver.save_attachment(atachments,event,null);
         expect(ret).to.be.equal(-1); 
     });
-    
     it('should not find good atachement (save_attachment_personal)', function () {
         var atachments = [{type:'jiberish'},
             {type:'jiberish'}];
@@ -34,8 +33,6 @@ describe('Saver', function () {
         var ret = saver.save_attachment_personal(atachments,event,null);
         expect(ret).to.be.equal(-1); 
     });
-
-    
     it('should try save photo in :collected: (save_attachment)', function () {
         var atachments = [{type:'photo', link:'random'},
             {type:'jiberish'}];
@@ -53,7 +50,6 @@ describe('Saver', function () {
 
         restore();
     });
-
     it('should try save photo in :collected: (save_attachment_personal)', function () {
         var atachments = [{type:'photo', link:'random'},
             {type:'jiberish'}];
@@ -71,7 +67,6 @@ describe('Saver', function () {
 
         restore();
     });
-
     it('should try save photo in :cats: (save_attachment_personal)', function () {
         var atachments = [{type:'photo', link:'random'},
             {type:'jiberish'}];
@@ -90,9 +85,6 @@ describe('Saver', function () {
 
         restore();
     });
-
-
-    
     it('should test the the photo handler', function () {
 
         var atachment = {type:'photo', largePreviewUrl:'random', ID:42};

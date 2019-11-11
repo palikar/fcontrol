@@ -39,17 +39,17 @@
         "node-mutex": "^0.2.2",
         "queuejs": "^0.1.0",
         "shelljs": "^0.8.2",
-        "winston": "^3.1.0"
+        "winston": "^3.1.0",
+        "winston-daily-rotate-file": "^4.2.1"
     },
     "devDependencies": {
         "chai": "^4.2.0",
         "eslint": "^5.7.0",
-				"eslint-utils": ">=1.4.1",
+        "eslint-utils": ">=1.4.1",
         "mocha": "^5.2.0",
         "rewire": "^4.0.1",
         "sinon": "^7.1.0",
-				"lodash": ">=4.17.13",
-				"just-extend": ">=4.0.0"
-				
+        "lodash": ">=4.17.13",
+        "just-extend": ">=4.0.0"
     }
 }
