@@ -34,7 +34,7 @@
     "dependencies": {
         "expandenv": "^1.0.0",
         "facebook-chat-api": "^1.6.0",
-        "lodash": ">=4.17.5",
+        "lodash": ">=4.17.13",
         "meow": "^5.0.0",
         "node-mutex": "^0.2.2",
         "queuejs": "^0.1.0",
