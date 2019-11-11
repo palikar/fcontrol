@@ -5,12 +5,12 @@ const readline = require('readline');
 const minimist = require('minimist');
 const dispatch = require('./lib/distributer.js');
 
+
 let args = minimist(process.argv.slice(2), {
 		string: ['email', 'pass', ],
 		boolean: ['cli', 'version', 'help', 'restore-state', 'save-state'],
 		alias: { v:'version', h:'help', p:'pass', e:'email' }
 });
-
 
 
 if (args.help) {
@@ -34,7 +34,7 @@ if (args.version) {
 		process.exit(1);
 }
 
-if(args.cli){
+if (args.cli){
 
 		if(args['restore-state']) {
 				
@@ -60,7 +60,6 @@ var rl = readline.createInterface({
 		output: process.stdout
 });
 
-
 if (fs.existsSync(path.join(__dirname, '.appstate.json'))) {
 		rl.question('Restore app state(y/n): ', (yn) => {
 				if (yn.toLowerCase() === 'y' || yn.toLowerCase() === 'yes'){
@@ -71,7 +70,8 @@ if (fs.existsSync(path.join(__dirname, '.appstate.json'))) {
 		});
 }
 
-function promtLogin(rl){
+function promtLogin(rl)
+{
 		rl.question('Facebook Email adress: ', (name) => {
 				rl.stdoutMuted = true;
 				rl.query = 'Password : ';
@@ -88,8 +88,6 @@ function promtLogin(rl){
 								rl.output.write(stringToWrite);
 				};
 		});
-
-
 
 }
 
