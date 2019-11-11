@@ -91,11 +91,6 @@ function promtLogin(rl) {
 
 function initFacebookChat(email, pass, saveState, restoreState){
     var loginInfo;
-
-    console.log('Initing email: ' + email)
-    console.log('Initing pass: ' + pass)
-    console.log('Save state: ' + saveState)
-    console.log('Restore state: ' + restoreState)
     
     if (!restoreState) {
         loginInfo ={email: email, password: pass};

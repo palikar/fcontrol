@@ -1,0 +1,15 @@
+[Unit]
+Description=FControl service loggs fb-messages
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=2
+User=arnaud
+ExecStart=/usr/bin/env node <path> --restore-state --cli
+WorkingDirectory=<dir>
+
+[Install]
+WantedBy=multi-user.target
