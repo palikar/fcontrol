@@ -14,23 +14,25 @@ let args = minimist(process.argv.slice(2), {
 
 if (args.help) {
     console.log(`Description:
-                A tool that logs different events coming from your facebook messanger (messages, typing, presence, attachments)
-                Usage:
-                                fcontrol [options]
+       A tool that logs different events coming from your facebook messanger (messages, typing, presence, attachments)
+Usage:
+       fcontrol [options]
 
-                Options:
-                                -h, --help         print usage information and exit
-                                -v, --version      show version info and exit
-                                -cli               use the tool only with command line arguments
-                                -e  --email        the email of your facebook acount
-                                -p  --pass         the password of your facebook acount`);
-
-    process.exit(1);
+Options:
+       -e  --email        the email of your facebook acount
+       -p  --pass         the password of your facebook acount
+       --cli              use the tool only with command line arguments
+       --restore-state    restore the state if a .appstate.json file is present
+       --save-state       save the state of the app once logged in
+       -h, --help         print usage information and exit
+       -v, --version      show version info and exit`);
+    process.exit(0);
 }
 
 if (args.version) {
-    console.log('Version: 1.0.0');
-    process.exit(1);
+    console.log('NodeJS: ' + process.version);
+    console.log('FControl version: ' + fs.readFileSync(path.join(__dirname, 'version'), 'utf8'));
+    process.exit(0);
 }
 
 if (args.cli){
