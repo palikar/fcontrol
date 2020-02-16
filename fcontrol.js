@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-fconst login = require('facebook-chat-api');
+const login = require('facebook-chat-api');
 const readline = require('readline');
 const minimist = require('minimist');
 const dispatch = require('./lib/distributer.js');
